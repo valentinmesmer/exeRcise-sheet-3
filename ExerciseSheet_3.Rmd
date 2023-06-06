@@ -3,7 +3,6 @@ title: "Exercise 3"
 subtitle: "Fortgeschrittene Statistische Software für NF - SS 2022/23"
 author: "Valentin Mesmer (12578200), Tim-Luis Hartenfels (12597574), Junis Al Attar (12574322)"
 date: "`r Sys.Date()`"
-output: pdf_document
 ---
 
 

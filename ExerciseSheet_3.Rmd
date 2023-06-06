@@ -23,3 +23,10 @@ d) Strengths of Git:
 ## Exercise 2: Putting your Repository on GitHub (3.5 Points)
  
 a) [Repo](https://github.com/valentinmesmer/exeRcise-sheet-3)
+
+
+## Exercise 3: Baby-Names in Munich (4.5 Points)
+
+
+
+

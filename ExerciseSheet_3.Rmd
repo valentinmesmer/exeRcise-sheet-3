@@ -138,6 +138,55 @@ a)
     
     
     This code will calculate the means of each row in the tax_data data frame, excluding the first column. The resulting          row_means object will be a vector containing the means of each row.
+    
+    
+b)
+
+    The rapply() function in R is a recursive version of the lapply() function. It is used to apply a function to each element     of a list or nested list structure, including lists within lists, matrices, or data frames.
+
+    Let's create a simple example to demonstrate the usage of rapply(). Suppose we have a nested list called my_list that         contains some numeric values:
+    
+    
+    ```{r,warning=FALSE}
+    my_list <- list(a = 1, b = list(c = 2, d = 3), e = 4)
+    ``` 
+    
+    
+    To apply a function, let's say sqrt(), to each numeric element in the list, we can use rapply():
+    
+    
+    ```{r,warning=FALSE}
+    result <- rapply(my_list, sqrt, how = "replace")
+    ``` 
+    
+    In this example, sqrt() is the function we want to apply, and how = "replace" specifies that we want to replace the           original elements with the results of applying the function.
+
+    The rapply() function will recursively iterate through each element of my_list and apply the sqrt() function to numeric       elements, while leaving non-numeric elements unchanged. The resulting result will maintain the same structure as my_list,     but with numeric elements replaced by their square roots.
+
+    In our example, the resulting result will be:
+    
+    ```{r,warning=FALSE}
+    result$a
+    
+    result$b
+    
+    result$b$c
+    
+    result$b$d
+    
+    result$e
+    ``` 
+    
+    
+    Here, the numeric elements 1, 2, 3, and 4 have been replaced with their respective square roots.
+
+    In summary, rapply() is a recursive version of lapply() that applies a function to each element in a nested list              structure, allowing for the manipulation of specific elements while preserving the original structure.
+
+    
+
+    
+
+
 
 
 

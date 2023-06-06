@@ -27,6 +27,36 @@ a) [Repo](https://github.com/valentinmesmer/exeRcise-sheet-3)
 
 ## Exercise 3: Baby-Names in Munich (4.5 Points)
 
+b)
+    ```{r}
+    library(readr)
+
+    data2022 <- read_csv("vornamen_2022.csv",show_col_types = FALSE)
+    data2021 <- read_csv("vornamen_2021.csv",show_col_types = FALSE)
+    ```
+    
+    Type Anzahl: Chr
+    Its not numeric, because there are rows called "4 oder weniger"
+    
+    ```{r}
+    library(readr)
+    library(dplyr)
+
+    data2022 <- data2022 %>% 
+    mutate(Anzahl = ifelse(Anzahl == "4 oder weniger", 4, as.numeric(Anzahl)))
+
+    data2021 <- data2021 %>% 
+    mutate(Anzahl = ifelse(Anzahl == "4 oder weniger", 4, as.numeric(Anzahl)))
+
+
+
+    ```  
+    
+    
+    Explenation!
+    
+
+
 
 
 

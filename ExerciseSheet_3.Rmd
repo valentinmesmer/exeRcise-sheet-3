@@ -1,0 +1,22 @@
+---
+title: "Exercise 3"
+subtitle: "Fortgeschrittene Statistische Software für NF - SS 2022/23"
+author: "Valentin Mesmer (12578200), Tim-Luis Hartenfels (12597574), Junis Al Attar (12574322)"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+
+## Exercise 1: Initializing git (4 Points)
+
+d) Strengths of Git:
+
+      1. **Distributed Version Control**: Git is a distributed version control system, which means that each developer working on a project has a complete copy of the entire repository. This enables developers to work offline, commit changes locally, and synchronize with other repositories when connected. It provides flexibility and resilience, allowing developers to collaborate effectively even in decentralized or unreliable network environments.
+      
+      2. **Branching and Merging**: Git provides powerful branching and merging capabilities. Developers can easily create multiple branches to work on different features or experiments independently. Branches can be merged back into the main codebase, allowing for smooth integration of changes. This makes it easier to manage complex development workflows and collaborate with other team members seamlessly.
+
+    Weaknesses of Git:
+
+      1. **Complexity and Learning Curve**: Git has a relatively steep learning curve, especially for beginners or developers who are accustomed to centralized version control systems. The myriad of commands and concepts can be overwhelming initially, making it challenging to grasp the full power of Git. However, with practice and experience, developers can become proficient in using Git effectively.
+      
+      2. **Poor Handling of Large Binary Files**: Git is optimized for tracking changes in text-based files. When it comes to large binary files, such as images, audio files, or video files, Git's performance can degrade. Storing and tracking changes in large binary files can significantly increase the size of the repository and slow down operations like cloning or fetching. To manage large binary files more efficiently, additional tools like Git LFS (Large File Storage) may be required.

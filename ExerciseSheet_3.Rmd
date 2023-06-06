@@ -3,6 +3,7 @@ title: "Exercise 3"
 subtitle: "Fortgeschrittene Statistische Software für NF - SS 2022/23"
 author: "Valentin Mesmer (12578200), Tim-Luis Hartenfels (12597574), Junis Al Attar (12574322)"
 date: "`r Sys.Date()`"
+output: pdf_document
 ---
 
 
@@ -28,7 +29,7 @@ a) [Repo](https://github.com/valentinmesmer/exeRcise-sheet-3)
 ## Exercise 3: Baby-Names in Munich (4.5 Points)
 
 b)
-    ```{r,warning=FALSE}
+    ```{r, message=FALSE, warning=FALSE}
     library(readr)
 
     data2022 <- read_csv("vornamen_2022.csv",show_col_types = FALSE)
@@ -38,7 +39,7 @@ b)
     Type Anzahl: Chr
     Its not numeric, because there are rows called "4 oder weniger"
     
-    ```{r, warning=FALSE}
+    ```{r, message=FALSE, warning=FALSE}
     library(readr)
     library(dplyr)
 
@@ -81,6 +82,26 @@ d)
 
     data2021 <- data2021 %>%
     mutate(year = 2021)
+    ```
+
+e)
+
+    ```{r,warning=FALSE}
+    combined_data <- bind_rows(data2022, data2021)
+    ```
+    
+f)
+
+    ```{r,warning=FALSE}
+    top_names <- combined_data %>%
+    group_by(Vorname) %>%
+    summarize(Total_Count = sum(Anzahl, na.rm = TRUE)) %>%
+    arrange(desc(Total_Count)) %>%
+    head(10)
+    
+    library(knitr)
+
+    kable(top_names, caption = "Top 10 Most Popular Names")
     ```
 
 

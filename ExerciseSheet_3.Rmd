@@ -19,3 +19,7 @@ d) Strengths of Git:
       1. **Complexity and Learning Curve**: Git has a relatively steep learning curve, especially for beginners or developers who are accustomed to centralized version control systems. The myriad of commands and concepts can be overwhelming initially, making it challenging to grasp the full power of Git. However, with practice and experience, developers can become proficient in using Git effectively.
       
       2. **Poor Handling of Large Binary Files**: Git is optimized for tracking changes in text-based files. When it comes to large binary files, such as images, audio files, or video files, Git's performance can degrade. Storing and tracking changes in large binary files can significantly increase the size of the repository and slow down operations like cloning or fetching. To manage large binary files more efficiently, additional tools like Git LFS (Large File Storage) may be required.
+
+## Exercise 2: Putting your Repository on GitHub (3.5 Points)
+ 
+a) [Repo](https://github.com/valentinmesmer/exeRcise-sheet-3)

@@ -11,72 +11,90 @@ output: pdf_document
 
 d) Strengths of Git:
 
-      1. **Distributed Version Control**: Git is a distributed version control system, which means that each developer working on a project has a complete copy of the entire repository. This enables developers to work offline, commit changes locally, and synchronize with other repositories when connected. It provides flexibility and resilience, allowing developers to collaborate effectively even in decentralized or unreliable network environments.
-      
-      2. **Branching and Merging**: Git provides powerful branching and merging capabilities. Developers can easily create multiple branches to work on different features or experiments independently. Branches can be merged back into the main codebase, allowing for smooth integration of changes. This makes it easier to manage complex development workflows and collaborate with other team members seamlessly.
+    1. Git enables every developer working on a project to have a copy of the repository at a special version, so he can work           offline and synchronize with the repository when connected to the internet
+    
+    2. Developers can create branches to work on different features or versions and merge them later.
+    
 
     Weaknesses of Git:
 
-      1. **Complexity and Learning Curve**: Git has a relatively steep learning curve, especially for beginners or developers who are accustomed to centralized version control systems. The myriad of commands and concepts can be overwhelming initially, making it challenging to grasp the full power of Git. However, with practice and experience, developers can become proficient in using Git effectively.
+      1. It may be hard to learn git, because at the beginning learners may have some problems to create an account and to                understand the connection between e.g. GitHub and their local version.
+    
+      2. Git tracks the changes in files line by line, which is really great for code, but really bad for large files like                images, zips or binaries.
       
-      2. **Poor Handling of Large Binary Files**: Git is optimized for tracking changes in text-based files. When it comes to large binary files, such as images, audio files, or video files, Git's performance can degrade. Storing and tracking changes in large binary files can significantly increase the size of the repository and slow down operations like cloning or fetching. To manage large binary files more efficiently, additional tools like Git LFS (Large File Storage) may be required.
-
+      
 ## Exercise 2: Putting your Repository on GitHub (3.5 Points)
  
-a) [Repo](https://github.com/valentinmesmer/exeRcise-sheet-3)
+a) [GitHub Repository](https://github.com/valentinmesmer/exeRcise-sheet-3)
 
 
 ## Exercise 3: Baby-Names in Munich (4.5 Points)
 
 b)
-    ```{r, message=FALSE, warning=FALSE}
+    ```{r}
     library(readr)
 
-    data2022 <- read_csv("vornamen_2022.csv",show_col_types = FALSE)
-    data2021 <- read_csv("vornamen_2021.csv",show_col_types = FALSE)
+    data2022 <- read_csv("vornamen_2022.csv",col_types = 
+                           cols(Vorname = col_character(), 
+                                Anzahl = col_character(), 
+                                Geschlecht = col_character()))
+    data2021 <- read_csv("vornamen_2021.csv",col_types = 
+                            cols(Vorname = col_character(), 
+                                 Anzahl = col_character(), 
+                                 Geschlecht = col_character()))
     ```
     
-    Type Anzahl: Chr
-    Its not numeric, because there are rows called "4 oder weniger"
+    Type of "Anzahl": Character
     
-    ```{r, message=FALSE, warning=FALSE}
+    Its not numeric, because there are rows called "4 oder weniger", which is not numeric
+    
+    
+    ```{r, warning=FALSE, message=FALSE}
     library(readr)
     library(dplyr)
-
+    
     data2022 <- data2022 %>% 
-    mutate(Anzahl = ifelse(Anzahl == "4 oder weniger", 4, as.numeric(Anzahl)))
+    mutate(Anzahl = ifelse(Anzahl == "4 oder weniger", 2.5, as.numeric(Anzahl)))
 
     data2021 <- data2021 %>% 
-    mutate(Anzahl = ifelse(Anzahl == "4 oder weniger", 4, as.numeric(Anzahl)))
-
-
+    mutate(Anzahl = ifelse(Anzahl == "4 oder weniger", 2.5, as.numeric(Anzahl)))
 
     ```  
     
     
-    Explenation!
+    We set all "4 oder weniger" to 2.5, because this is the mid of the possible values 1,2,3,4. 
+    
+    On top of this its not a natural number, so it's obvious that it's not a real measured value.
+    
     
 
 c)
 
-    ```{r,warning=FALSE}
+    ```{r}
     total_babies_2022 <- sum(data2022$Anzahl, na.rm = TRUE)
     total_babies_2021 <- sum(data2021$Anzahl, na.rm = TRUE)
     
     if (total_babies_2022 > total_babies_2021) {
-    bigger_baby_boom_year <- 2022
+      bigger_baby_boom_year <- 2022
     } else if (total_babies_2022 < total_babies_2021) {
-    bigger_baby_boom_year <- 2021
+      bigger_baby_boom_year <- 2021
     } else {
-    bigger_baby_boom_year <- "Both years had the same number of babies"
+      bigger_baby_boom_year <- NULL
     }
-    bigger_baby_boom_year
+    
+    
+    if (is.null(bigger_baby_boom_year)) {
+      cat("There was no significant difference in baby booms between 2021 and 2022.")
+    } else {
+      cat("The year with the bigger baby boom is", bigger_baby_boom_year)
+    }
+  
     ```
     
 
 d)
 
-    ```{r,warning=FALSE}
+    ```{r}
     data2022 <- data2022 %>%
     mutate(year = 2022)
 
@@ -86,21 +104,19 @@ d)
 
 e)
 
-    ```{r,warning=FALSE}
+    ```{r}
     combined_data <- bind_rows(data2022, data2021)
     ```
     
 f)
 
-    ```{r,warning=FALSE}
+    ```{r}
+    library(knitr)
     top_names <- combined_data %>%
     group_by(Vorname) %>%
-    summarize(Total_Count = sum(Anzahl, na.rm = TRUE)) %>%
-    arrange(desc(Total_Count)) %>%
+    summarize(count = sum(Anzahl, na.rm = TRUE)) %>%
+    arrange(desc(count)) %>%
     head(10)
-    
-    library(knitr)
-
     kable(top_names, caption = "Top 10 Most Popular Names")
     ```
 
@@ -111,7 +127,7 @@ a)
 
 
   
-    ```{r,warning=FALSE}
+    ```{r}
     tax_data <- data.frame( Name = c("Munich GmbH", "ABC Inc.", 
                                      "Backpacks 1980", "Bavarian Circus"),
     Tax_2019 = c(5000, 4000, 6000, 3500), 
@@ -119,20 +135,17 @@ a)
     Tax_2021 = c(5200, 3800,5900, 3400))
     ``` 
 
-    The incorrect apply function used in the code is lapply(tax_data[, -1], 2, mean). The correct apply function to calculate     column-wise means is sapply.
-    To correct the code and calculate the column-wise means, you can replace the incorrect line with the following code:
+    The incorrect apply function used in the code is lapply(tax_data[, -1], 2, mean). The correct apply function to calculate        column-wise means is sapply.
     
     
-    ```{r,warning=FALSE}
+    ```{r}
     column_means <- sapply(tax_data[, -1], mean)
     ``` 
     
     
-    This code will calculate the means of each column in the tax_data data frame, excluding the first column (Name). The          resulting column_means object will be a vector containing the means of each column.
+    To calculate the row-wise means, you can use the rowMeans function.
     
-    To calculate the row-wise means, you can use the rowMeans function. Here's the corrected code:
-    
-    ```{r,warning=FALSE}
+    ```{r}
     row_means <- rowMeans(tax_data[, -1])
     ``` 
     
@@ -142,30 +155,30 @@ a)
     
 b)
 
-    The rapply() function in R is a recursive version of the lapply() function. It is used to apply a function to each element     of a list or nested list structure, including lists within lists, matrices, or data frames.
+    The rapply() function in R is a recursive version of the lapply() function. 
+    It is used to apply a function to each element of a list or nested list structure, including lists within lists, matrices, or     data frames.
 
-    Let's create a simple example to demonstrate the usage of rapply(). Suppose we have a nested list called my_list that         contains some numeric values:
+    Example:
     
     
-    ```{r,warning=FALSE}
-    my_list <- list(a = 1, b = list(c = 2, d = 3), e = 4)
+    ```{r}
+    example_list <- list(a = 1, b = list(c = 2, d = 3), e = 4)
     ``` 
     
     
     To apply a function, let's say sqrt(), to each numeric element in the list, we can use rapply():
     
     
-    ```{r,warning=FALSE}
-    result <- rapply(my_list, sqrt, how = "replace")
+    ```{r}
+    result <- rapply(example_list, sqrt, how = "replace")
     ``` 
     
-    In this example, sqrt() is the function we want to apply, and how = "replace" specifies that we want to replace the           original elements with the results of applying the function.
+    In this example, sqrt() is the function we want to apply, and how = "replace" specifies that we want to replace the              original elements with the results of applying the function.
 
-    The rapply() function will recursively iterate through each element of my_list and apply the sqrt() function to numeric       elements, while leaving non-numeric elements unchanged. The resulting result will maintain the same structure as my_list,     but with numeric elements replaced by their square roots.
+    The rapply() function will recursively iterate through each element of example_list and apply the sqrt() function to numeric     elements, while leaving non-numeric elements unchanged. 
+    The resulting result will maintain the same structure as example_list, but with numeric elements replaced by their square        roots.
 
-    In our example, the resulting result will be:
-    
-    ```{r,warning=FALSE}
+    ```{r}
     result$a
     
     result$b
@@ -177,10 +190,8 @@ b)
     result$e
     ``` 
     
-    
-    Here, the numeric elements 1, 2, 3, and 4 have been replaced with their respective square roots.
 
-    In summary, rapply() is a recursive version of lapply() that applies a function to each element in a nested list              structure, allowing for the manipulation of specific elements while preserving the original structure.
+    In summary, rapply() is a recursive version of lapply() that applies a function to each element in a nested list                 structure, allowing for the manipulation of specific elements while preserving the original structure.
 
     
 

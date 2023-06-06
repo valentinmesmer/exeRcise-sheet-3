@@ -28,7 +28,7 @@ a) [Repo](https://github.com/valentinmesmer/exeRcise-sheet-3)
 ## Exercise 3: Baby-Names in Munich (4.5 Points)
 
 b)
-    ```{r}
+    ```{r,warning=FALSE}
     library(readr)
 
     data2022 <- read_csv("vornamen_2022.csv",show_col_types = FALSE)
@@ -38,7 +38,7 @@ b)
     Type Anzahl: Chr
     Its not numeric, because there are rows called "4 oder weniger"
     
-    ```{r}
+    ```{r, warning=FALSE}
     library(readr)
     library(dplyr)
 
@@ -55,6 +55,25 @@ b)
     
     Explenation!
     
+
+c)
+
+    ```{r,warning=FALSE}
+    total_babies_2022 <- sum(data2022$Anzahl, na.rm = TRUE)
+    total_babies_2021 <- sum(data2021$Anzahl, na.rm = TRUE)
+    
+    if (total_babies_2022 > total_babies_2021) {
+    bigger_baby_boom_year <- 2022
+    } else if (total_babies_2022 < total_babies_2021) {
+    bigger_baby_boom_year <- 2021
+    } else {
+    bigger_baby_boom_year <- "Both years had the same number of babies"
+    }
+    bigger_baby_boom_year
+
+    ```  
+
+
 
 
 

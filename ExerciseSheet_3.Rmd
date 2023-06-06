@@ -70,8 +70,20 @@ c)
     bigger_baby_boom_year <- "Both years had the same number of babies"
     }
     bigger_baby_boom_year
+    ```
+    
 
-    ```  
+d)
+
+    ```{r,warning=FALSE}
+    data2022 <- data2022 %>%
+    mutate(year = 2022)
+
+    data2021 <- data2021 %>%
+    mutate(year = 2021)
+    ```
+
+
 
 
 
